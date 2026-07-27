@@ -18,5 +18,7 @@ func rootCmd() *cobra.Command {
 	root.AddCommand(waitgroupCmd())
 	root.AddCommand(generatorCmd())
 	root.AddCommand(faninCmd())
+	root.AddCommand(poolCmd())
+	root.AddCommand(pipelineCmd())
 	return root
 }
