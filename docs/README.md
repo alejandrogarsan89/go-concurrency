@@ -1,0 +1,55 @@
+# go-concurrency — Theory & Design Notes
+
+This directory explains the **concurrency and parallelism** concepts behind the
+library: what each pattern is, the bugs it prevents, its trade-offs, and when to
+reach for it. Code lives in each `patterns/` package with full godoc; these
+pages give the conceptual picture and diagrams.
+
+## Index
+
+| Page | Covers |
+|------|--------|
+| [Fundamentals](fundamentals.md) | WaitGroup, channel generators, fan-in |
+
+*(more pages are added with each phase: worker pools & pipelines, synchronization
+primitives, real parallelism, and mini-apps)*
+
+## Concurrency vs Parallelism
+
+These words are often confused; the distinction matters.
+
+- **Concurrency** is a *structuring* concept: dealing with many things at once
+  by composing independently executing tasks (goroutines). A single CPU core can
+  run concurrent code by interleaving tasks.
+- **Parallelism** is an *execution* concept: doing many things at the same
+  instant, which requires multiple CPU cores.
+
+> Rob Pike: *"Concurrency is about **dealing with** lots of things at once.
+> Parallelism is about **doing** lots of things at once."*
+
+Go gives you concurrency primitives (goroutines, channels, `select`); the
+runtime then schedules those goroutines across `GOMAXPROCS` OS threads, turning
+concurrency into parallelism when cores are available. Well-structured
+concurrent code becomes parallel *for free* — but only if it's correct.
+
+## The two hard problems this library guards against
+
+1. **Data races** — two goroutines touch the same memory and at least one
+   writes, without synchronization. The result is undefined behaviour. Go ships
+   a **race detector** (`go test -race`); every test here runs under it.
+2. **Goroutine leaks** — a goroutine blocks forever (usually on a channel
+   send/receive) because nobody will ever unblock it. Leaks silently consume
+   memory and hold resources. Every blocking goroutine here is cancellable via
+   `context.Context`, and tests use [`goleak`](https://github.com/uber-go/goleak)
+   to assert no goroutine outlives the test.
+
+## Golden rules used throughout
+
+- **The sender closes the channel, never the receiver** — and closes it exactly
+  once. Closing signals "no more values"; sending on a closed channel panics.
+- **Whoever starts a goroutine is responsible for it stopping.** Provide a way
+  out (a closed input channel or a cancelled context).
+- **`select` with `<-ctx.Done()`** on every potentially-blocking send/receive so
+  a task can always be cancelled.
+- **Prefer channels to share data; use mutexes to protect state.** ("Don't
+  communicate by sharing memory; share memory by communicating.")
