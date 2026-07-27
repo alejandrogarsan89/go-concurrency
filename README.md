@@ -105,12 +105,21 @@ for v := range fanin.Merge(ctx, a, b) {
 
 ## Documentation
 
-The [`docs/`](docs/) directory explains each pattern conceptually — what it is,
-the pitfalls it avoids, and when to use it:
+The [`docs/`](docs/) directory is a self-contained course on Go concurrency —
+the theory underneath, the patterns built on it, and the judgement to apply them:
 
+**Foundations — how Go concurrency actually works**
+- [The Go Memory Model & `happens-before`](docs/memory-model.md) — data races, visibility, what channels/`sync`/atomics guarantee
+- [The Go Scheduler (G-M-P)](docs/scheduler.md) — goroutines vs threads, `GOMAXPROCS`, work-stealing, preemption
+
+**Patterns — reusable building blocks**
 - [Overview & concurrency vs parallelism](docs/README.md)
 - [Fundamentals: WaitGroup, generators, fan-in](docs/fundamentals.md)
 - [Worker Pools & Pipelines](docs/pool-pipeline.md)
+
+**Practice — applying it correctly**
+- [Pitfalls & Anti-Patterns](docs/pitfalls.md) — the classic bugs and their fixes
+- [Choosing the Right Primitive](docs/decision-guide.md) — decision guide + cheat-sheet
 
 ## Project layout
 
