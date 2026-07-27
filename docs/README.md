@@ -7,12 +7,31 @@ pages give the conceptual picture and diagrams.
 
 ## Index
 
+The docs are organised in three layers — the theory underneath, the patterns
+built on it, and the judgement to apply them well.
+
+### Foundations — how Go concurrency actually works
+
+| Page | Covers |
+|------|--------|
+| [The Go Memory Model & `happens-before`](memory-model.md) | data races, visibility, the guarantees channels/`sync`/atomics give you |
+| [The Go Scheduler (G-M-P)](scheduler.md) | goroutines vs threads, `GOMAXPROCS`, work-stealing, preemption, blocking |
+
+### Patterns — reusable building blocks
+
 | Page | Covers |
 |------|--------|
 | [Fundamentals](fundamentals.md) | WaitGroup, channel generators, fan-in |
 | [Worker Pools & Pipelines](pool-pipeline.md) | bounded worker pool, multi-stage pipelines |
 
-*(more pages are added with each phase: synchronization primitives, real
+### Practice — applying it correctly
+
+| Page | Covers |
+|------|--------|
+| [Pitfalls & Anti-Patterns](pitfalls.md) | the classic bugs (races, leaks, deadlocks, bad closes) and their fixes |
+| [Choosing the Right Primitive](decision-guide.md) | decision guide + cheat-sheet: which tool for which problem |
+
+*(more pattern pages are added with each phase: synchronization primitives, real
 parallelism, and mini-apps)*
 
 ## Concurrency vs Parallelism
