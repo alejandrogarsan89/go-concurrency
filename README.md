@@ -49,9 +49,9 @@ mindmap
       Pub/Sub broker
 ```
 
-> **Roadmap.** This is **phase 1 — fundamentals** (`WaitGroup`, generators,
-> fan-in). Later phases add worker pools & pipelines, synchronization
-> primitives, real parallelism with speedup benchmarks, and mini-applications.
+> **Roadmap.** Phase 1 (fundamentals) and **phase 2 — worker pools &
+> pipelines** are done. Later phases add synchronization primitives, real
+> parallelism with speedup benchmarks, and mini-applications.
 
 ## Quick start
 
@@ -60,6 +60,8 @@ mindmap
 go run ./cmd/demo waitgroup --tasks 8
 go run ./cmd/demo generator --n 10 --take 3
 go run ./cmd/demo fanin --sources 3 --per 4
+go run ./cmd/demo pool --jobs 20 --workers 4
+go run ./cmd/demo pipeline --n 12
 
 # Or use the Makefile
 make run ARGS="waitgroup --tasks 8"
@@ -98,6 +100,8 @@ for v := range fanin.Merge(ctx, a, b) {
 | Fundamentals | `waitgroup.RunAll`, `waitgroup.Map` | launch goroutines and wait with `sync.WaitGroup` |
 | Fundamentals | `generator.Ints/FromSlice/Take` | channel generators with context cancellation |
 | Fundamentals | `fanin.Merge` | merge many channels into one without leaking |
+| Patterns | `pool.Process`, `pool.Map` | bounded worker pool (controlled parallelism) |
+| Patterns | `pipeline.Map`, `pipeline.Filter` | multi-stage streaming pipeline |
 
 ## Documentation
 
@@ -106,6 +110,7 @@ the pitfalls it avoids, and when to use it:
 
 - [Overview & concurrency vs parallelism](docs/README.md)
 - [Fundamentals: WaitGroup, generators, fan-in](docs/fundamentals.md)
+- [Worker Pools & Pipelines](docs/pool-pipeline.md)
 
 ## Project layout
 

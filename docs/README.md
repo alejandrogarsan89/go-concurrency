@@ -10,9 +10,10 @@ pages give the conceptual picture and diagrams.
 | Page | Covers |
 |------|--------|
 | [Fundamentals](fundamentals.md) | WaitGroup, channel generators, fan-in |
+| [Worker Pools & Pipelines](pool-pipeline.md) | bounded worker pool, multi-stage pipelines |
 
-*(more pages are added with each phase: worker pools & pipelines, synchronization
-primitives, real parallelism, and mini-apps)*
+*(more pages are added with each phase: synchronization primitives, real
+parallelism, and mini-apps)*
 
 ## Concurrency vs Parallelism
 
