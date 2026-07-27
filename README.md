@@ -49,9 +49,9 @@ mindmap
       Pub/Sub broker
 ```
 
-> **Roadmap.** Phase 1 (fundamentals) and **phase 2 — worker pools &
-> pipelines** are done. Later phases add synchronization primitives, real
-> parallelism with speedup benchmarks, and mini-applications.
+> **Roadmap.** Phase 1 (fundamentals), phase 2 (worker pools & pipelines) and
+> **phase 3 — synchronization primitives** are done. Later phases add real
+> parallelism with speedup benchmarks and mini-applications.
 
 ## Quick start
 
@@ -62,6 +62,10 @@ go run ./cmd/demo generator --n 10 --take 3
 go run ./cmd/demo fanin --sources 3 --per 4
 go run ./cmd/demo pool --jobs 20 --workers 4
 go run ./cmd/demo pipeline --n 12
+go run ./cmd/demo once --goroutines 100
+go run ./cmd/demo semaphore --tasks 20 --limit 3
+go run ./cmd/demo group --tasks 5 --fail
+go run ./cmd/demo singleflight --callers 100
 
 # Or use the Makefile
 make run ARGS="waitgroup --tasks 8"
@@ -102,6 +106,10 @@ for v := range fanin.Merge(ctx, a, b) {
 | Fundamentals | `fanin.Merge` | merge many channels into one without leaking |
 | Patterns | `pool.Process`, `pool.Map` | bounded worker pool (controlled parallelism) |
 | Patterns | `pipeline.Map`, `pipeline.Filter` | multi-stage streaming pipeline |
+| Synchronization | `once.Lazy` | compute a value once, share it safely |
+| Synchronization | `semaphore.Semaphore` | cap concurrent access to a resource |
+| Synchronization | `group.Group` | run tasks, cancel all on first error (errgroup-style) |
+| Synchronization | `singleflight.Group` | collapse duplicate concurrent calls |
 
 ## Documentation
 
@@ -116,6 +124,7 @@ the theory underneath, the patterns built on it, and the judgement to apply them
 - [Overview & concurrency vs parallelism](docs/README.md)
 - [Fundamentals: WaitGroup, generators, fan-in](docs/fundamentals.md)
 - [Worker Pools & Pipelines](docs/pool-pipeline.md)
+- [Synchronization Primitives](docs/synchronization.md)
 
 **Practice — applying it correctly**
 - [Pitfalls & Anti-Patterns](docs/pitfalls.md) — the classic bugs and their fixes

@@ -20,5 +20,9 @@ func rootCmd() *cobra.Command {
 	root.AddCommand(faninCmd())
 	root.AddCommand(poolCmd())
 	root.AddCommand(pipelineCmd())
+	root.AddCommand(onceCmd())
+	root.AddCommand(semaphoreCmd())
+	root.AddCommand(groupCmd())
+	root.AddCommand(singleflightCmd())
 	return root
 }
