@@ -23,6 +23,7 @@ built on it, and the judgement to apply them well.
 |------|--------|
 | [Fundamentals](fundamentals.md) | WaitGroup, channel generators, fan-in |
 | [Worker Pools & Pipelines](pool-pipeline.md) | bounded worker pool, multi-stage pipelines |
+| [Synchronization Primitives](synchronization.md) | lazy init, semaphore, errgroup, singleflight |
 
 ### Practice — applying it correctly
 
