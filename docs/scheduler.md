@@ -136,5 +136,5 @@ hard real-time guarantee.
 
 **See also:** [The Go Memory Model](memory-model.md) for *visibility* guarantees,
 and [Choosing the Right Primitive](decision-guide.md) for sizing pools in
-practice. Measuring the speedup the scheduler makes possible (parallel map-reduce,
-speedup benchmarks) arrives in a later phase.
+practice. [Real Parallelism & Speedup](parallelism.md) measures the speedup the
+scheduler makes possible (parallel map-reduce and merge sort, with benchmarks).
