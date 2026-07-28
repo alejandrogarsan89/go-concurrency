@@ -49,9 +49,10 @@ mindmap
       Pub/Sub broker
 ```
 
-> **Roadmap.** Phase 1 (fundamentals), phase 2 (worker pools & pipelines) and
-> **phase 3 — synchronization primitives** are done. Later phases add real
-> parallelism with speedup benchmarks and mini-applications.
+> **Roadmap.** Phase 1 (fundamentals), phase 2 (worker pools & pipelines),
+> phase 3 (synchronization primitives) and **phase 4 — real parallelism with
+> speedup benchmarks** are done. The final phase adds mini-applications that
+> combine the patterns.
 
 ## Quick start
 
@@ -66,6 +67,8 @@ go run ./cmd/demo once --goroutines 100
 go run ./cmd/demo semaphore --tasks 20 --limit 3
 go run ./cmd/demo group --tasks 5 --fail
 go run ./cmd/demo singleflight --callers 100
+go run ./cmd/demo mapreduce --n 200000
+go run ./cmd/demo psort --n 2000000
 
 # Or use the Makefile
 make run ARGS="waitgroup --tasks 8"
@@ -110,6 +113,8 @@ for v := range fanin.Merge(ctx, a, b) {
 | Synchronization | `semaphore.Semaphore` | cap concurrent access to a resource |
 | Synchronization | `group.Group` | run tasks, cancel all on first error (errgroup-style) |
 | Synchronization | `singleflight.Group` | collapse duplicate concurrent calls |
+| Parallelism | `mapreduce.MapReduce` | parallel map-reduce over CPU cores (with speedup) |
+| Parallelism | `psort.Sort` | parallel fork-join merge sort |
 
 ## Documentation
 
@@ -125,6 +130,7 @@ the theory underneath, the patterns built on it, and the judgement to apply them
 - [Fundamentals: WaitGroup, generators, fan-in](docs/fundamentals.md)
 - [Worker Pools & Pipelines](docs/pool-pipeline.md)
 - [Synchronization Primitives](docs/synchronization.md)
+- [Real Parallelism & Speedup](docs/parallelism.md)
 
 **Practice — applying it correctly**
 - [Pitfalls & Anti-Patterns](docs/pitfalls.md) — the classic bugs and their fixes

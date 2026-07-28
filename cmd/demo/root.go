@@ -24,5 +24,7 @@ func rootCmd() *cobra.Command {
 	root.AddCommand(semaphoreCmd())
 	root.AddCommand(groupCmd())
 	root.AddCommand(singleflightCmd())
+	root.AddCommand(mapreduceCmd())
+	root.AddCommand(psortCmd())
 	return root
 }
