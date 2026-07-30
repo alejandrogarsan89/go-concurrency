@@ -32,9 +32,11 @@ built on it, and the judgement to apply them well.
 |------|--------|
 | [Pitfalls & Anti-Patterns](pitfalls.md) | the classic bugs (races, leaks, deadlocks, bad closes) and their fixes |
 | [Choosing the Right Primitive](decision-guide.md) | decision guide + cheat-sheet: which tool for which problem |
+| [Mini-Applications](mini-apps.md) | crawler, rate limiter, pub/sub — patterns composed into real programs |
 
-*(more pattern pages are added with each phase: synchronization primitives, real
-parallelism, and mini-apps)*
+*(the pattern and practice pages together cover all five phases: fundamentals,
+worker pools & pipelines, synchronization primitives, real parallelism, and mini
+applications)*
 
 ## Concurrency vs Parallelism
 
