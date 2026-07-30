@@ -26,5 +26,8 @@ func rootCmd() *cobra.Command {
 	root.AddCommand(singleflightCmd())
 	root.AddCommand(mapreduceCmd())
 	root.AddCommand(psortCmd())
+	root.AddCommand(crawlerCmd())
+	root.AddCommand(ratelimiterCmd())
+	root.AddCommand(pubsubCmd())
 	return root
 }
